@@ -2,39 +2,74 @@
 # -*- coding: utf-8 -*-
 
 
-
-
-class Foreign_Key
+class Reference
 
   constructor: ( @table_name, @key_name) ->
 
-  add_method: (Class, name) =>
-    Class::[name] = ->
-      table = @__db.tables[@table_name]
-      key = @__local[@key_name]
-      table.__find_by_id(key)
+  __method: =>
+    table_name = @table_name
+    key_name = @key_name
+    return () ->
+      try
+        table = @__db.tables[table_name]
+        key = @__local[key_name]
+        table.__find_by_id(key)
+      catch error
+        console.log('Error in reference method.')
+
 
 class Back_Reference
 
   constructor: (@table_name, @col) ->
 
-  add_method: (Class, name) =>
-    Class::[name] = ->
-      table = @__db.tables[@table_name]
-      table.__find_all(@col, @__id)
+  __method: =>
+    table_name = @table_name
+    col = @col
+    return () ->
+      try
+        table = @__db.tables[table_name]
+        id = @__id
+        table.__find_all(col, id)
+      catch error
+        console.log('Error back_reference method.')
 
 
-class Local_String
+class String_Column
 
-  constructor: (@name) ->
+  constructor: ->
 
-  add_method: (Class, name) =>
-    Class::[name] = ->
-      @__local[@name]
+  __method: (name) =>
+    return ->
+      try
+        @__local[name]
+      catch error
+        console.log('Error in string column method')
     
-    #     : new(Foreign_Key( 'team', 'team_id')
-    # teams: new Back_Reference('team', 'conference_name')
-     # = new Local_String()
+
+class Integer_Column
+
+  constructor: ->
+
+  __method: (name) =>
+    return ->
+      try
+        @__local[name]
+      catch error
+        console.log('Error in integer column method')
+    
+
+class Date_Column
+
+  constructor: ->
+
+  __method: (name) =>
+    return ->
+      try
+        @__local[name]
+      catch error
+        console.log('Error in date column method')
+
+
 
 #------------------------------------------------------------------------------------
 # meta classes extended by the definitions below
@@ -57,6 +92,10 @@ class Table
     @__rows = {}
     @__db.tables[@__name] = this
     @__add_methods()
+
+  __add_methods: =>
+    for name, column of @__columns
+      @__Row_Class::[name] = column.__method(name)
 
   __add_methods_old: =>
     for name in @__columns
@@ -94,14 +133,20 @@ class Table
 
   __find_by_id: (id) =>
     qs = "select * from #{@__name} where #{@__primary_key} = '#{id}'"
-    @__db.query(qs).then((rows) =>
-      return new @__Row_Class(rows[0]))
+    try
+      rows = await @__db.query(qs)
+      return new @__Row_Class(rows[0])
+    catch error
+      console.log("Query failed: \"#{qs}\"")
 
   __find_all: (col, val) =>
     qs = "select * from #{@__name} where #{col} = '#{val}'"
-    @__db.query(qs).then((rows) =>
-      return (new @__Row_Class(row) for row in rows))
-    
+    try
+      rows = await @__db.query(qs)
+      return (new @__Row_Class(row) for row in rows)
+    catch
+      console.log("Query failed: \"#{qs}\"")
+      
   __remove_row: (id) =>
     delete @__rows[id]
 
@@ -121,7 +166,7 @@ class Table_Row
       this[name] = method.bind(this)
 
   __init: (obj) =>
-    for col in @__table.__columns
+    for col,_ of @__table.__columns
       @__local[col] = obj[col] || null
     @__id = @__local[@__table.__primary_key]
       
@@ -143,3 +188,9 @@ class Table_Row
 
 exports.Table = Table
 exports.Table_Row = Table_Row
+exports.String_Column = String_Column
+exports.Integer_Column = Integer_Column
+exports.Date_Column = Date_Column
+exports.Reference = Reference
+exports.Back_Reference = Back_Reference
+
