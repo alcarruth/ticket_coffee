@@ -1,6 +1,41 @@
 #!/usr/bin/env coffee
 # -*- coding: utf-8 -*-
 
+
+
+
+class Foreign_Key
+
+  constructor: ( @table_name, @key_name) ->
+
+  add_method: (Class, name) =>
+    Class::[name] = ->
+      table = @__db.tables[@table_name]
+      key = @__local[@key_name]
+      table.__find_by_id(key)
+
+class Back_Reference
+
+  constructor: (@table_name, @col) ->
+
+  add_method: (Class, name) =>
+    Class::[name] = ->
+      table = @__db.tables[@table_name]
+      table.__find_all(@col, @__id)
+
+
+class Local_String
+
+  constructor: (@name) ->
+
+  add_method: (Class, name) =>
+    Class::[name] = ->
+      @__local[@name]
+    
+    #     : new(Foreign_Key( 'team', 'team_id')
+    # teams: new Back_Reference('team', 'conference_name')
+     # = new Local_String()
+
 #------------------------------------------------------------------------------------
 # meta classes extended by the definitions below
 # 
@@ -23,13 +58,7 @@ class Table
     @__db.tables[@__name] = this
     @__add_methods()
 
-  __method_names: =>
-    xs = @__columns
-    xs = xs.concat(k for k,v of @__foreign_keys)
-    xs = xs.concat(k for k,v of @__back_references)
-    return xs
-    
-  __add_methods: =>
+  __add_methods_old: =>
     for name in @__columns
       @__add_column_method(name)
     for name, spec of @__foreign_keys

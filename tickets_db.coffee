@@ -34,12 +34,10 @@ conferences = new Table(
   row_class: Conference
   primary_key: 'abbrev_name'
   columns: [
-    'abbrev_name', # = new Local_String()
-    'name',        # = new Local_String()
-    'logo'        
-    ]
-  back_references: {
-    teams: { table_name: 'team', col: 'conference_name' }
+    abbrev_name: new Local_String()
+    name: new Local_String()
+    logo: new Local_String()
+    teams: new Back_Reference('team', 'conference_name')
   })
 
 #------------------------------------------------------------------------------------
@@ -64,23 +62,19 @@ teams = new Table(
   tablename: 'team'
   row_class: Team
   primary_key: 'id'
-  columns: [
-    'id',
-    'name',
-    'nickname',
-    'logo',
-    'espn_id',
-    'city',
-    'state',
-    'conference_name',
-    'conference'
-    ]
-  foreign_keys: {
-    conference: { table_name: 'conference', key_name: 'conference_name' }
-    }
-  back_references: {
-    home_games: { table_name: 'game', col: 'home_team_id' }
-    away_games: { table_name: 'game', col: 'visiting_team_id' }
+  columns: {
+    id: new String_Column()
+    name: new String_Column()
+    nickname: new String_Column()
+    logo: new String_Column()
+    espn_id: new String_Column()
+    city: new String_Column()
+    state: new String_Column()
+    conference_name: new String_Column()
+    conference: new String_Column()
+    conference: new Foreign_Key('conference', 'conference_name')
+    home_games: new Back_Reference('game', 'home_team_id')
+    away_games: new Back_Reference('game', 'visiting_team_id')
     })
 
  
@@ -111,10 +105,13 @@ games = new Table(
   tablename: 'game'
   row_class: Game
   primary_key: 'id'
-  columns: [ 'id', 'home_team_id', 'visiting_team_id', 'date' ]
-  foreign_keys: {
-    home_team: { table_name: 'team', key_name: 'home_team_id' }
-    visiting_team: { table_name: 'team', key_name: 'visiting_team_id' }
+  columns: {
+    id: new String_Column()
+    home_team_id: new String_Column()
+    visiting_team_id: new String_Column()
+    date: new String_Column()
+    home_team: new Foreign_Key('team', 'home_team_id')
+    visiting_team: new Foreign_Key('team', 'visiting_team_id')
     })
 
 
@@ -136,8 +133,12 @@ ticket_users = new Table(
   tablename: 'ticket_user'
   row_class: Ticket_User
   primary_key: 'id'
-  columns: [ 'id', 'name', 'email', 'picture' ]
-  )
+  columns: {
+    id:  new String_Column()
+    name: new String_Column()
+    email: new String_Column()
+    picture: new String_Column()
+  })
 
 # add a user to the database
 #
@@ -196,14 +197,18 @@ ticket_lots = new Table(
   tablename: 'ticket_lot'
   row_class: Ticket_Lot
   primary_key: 'id'
-  columns: [ 'id', 'user_id', 'seller', 'game_id',
-    'section', 'row','price', 'img_path']
-  foreign_keys: {
-    user: { table_name: 'ticket_user', key_name: 'user_id' }
-    game: { table_name: 'game', key_name: 'game_id' }
-  }
-  back_references: {
-    tickets: { table_name: 'ticket', key_name: 'lot_id' }
+  columns: {
+    id: new String_Column()
+    user_id: new String_Column()
+    seller:  new String_Column()
+    game_id: new String_Column()
+    section: new String_Column()
+    row: new String_Column()
+    price: new String_Column()
+    img_path: new String_Column()
+    user: new Foreign_Key('ticket_user', 'user_id')
+    game: new Foreign_Key('game', 'game_id')
+    tickets: new Back_Reference('ticket', 'lot_id')
   })
 
 
@@ -228,9 +233,11 @@ tickets = new Table(
   tablename: 'ticket'
   row_class: Ticket
   primary_key: 'id'
-  columns: [ 'id', 'lot_id', 'seat' ]
-  foreign_keys: {
-    lot: { table_name: 'ticket_lot', key: 'lot_id' }
+  columns: {
+    id: new String_Column()
+    lot_id:  new String_Column()
+    seat:  new String_Column()
+    lot: new Foreign_Key('ticket_lot', 'lot_id')
     })
 
 #------------------------------------------------------------------------------------
