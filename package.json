@@ -1,0 +1,25 @@
+{
+  "name": "tickets_coffee",
+  "version": "1.0.0",
+  "description": "coffeescript port of my tickets'r'us project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/opt/git/www/tickets_coffee/"
+  },
+  "keywords": [
+    "database",
+    "coffeescript",
+    "pg",
+    "postgresql",
+    "async",
+    "await",
+    "websocket",
+    "ws_rmi"
+  ],
+  "author": "Al Carruth",
+  "license": "ISC"
+}
