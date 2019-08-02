@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "/opt/git/www/tickets_coffee/"
+    "url": "git@github.com:alcarruth/tickets_coffee.git"
   },
   "keywords": [
     "database",
@@ -21,10 +21,10 @@
     "ws_rmi"
   ],
   "author": "Al Carruth",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "db_orm": "file:../db_orm",
-    "ws_rmi": "file:../ws_rmi"
+    "db_worm": "git@github.com:alcarruth/db_worm.git",
+    "ws_rmi": "git@github.com:alcarruth/ws_rmi"
   },
   "dependencies": {
     "coffeescript": "^2.4.1",

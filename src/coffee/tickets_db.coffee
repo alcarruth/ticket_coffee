@@ -1,10 +1,10 @@
 #!/usr/bin/env coffee
 # -*- coding: utf-8 -*-
 
-db_orm = require('db_orm')
-{ Table, Table_Row } = db_orm
-{ SQL_String, SQL_Integer, SQL_Date } = db_orm
-{ Local_Method, Reference, Back_Reference } = db_orm
+db_worm = require('db_worm')
+{ Table, Table_Row } = db_worm
+{ SQL_String, SQL_Integer, SQL_Date } = db_worm
+{ Local_Method, Reference, Back_Reference } = db_worm
 
 { Client, Pool } = require('pg')
 
@@ -171,7 +171,7 @@ tables =
 
 exports.pool = pool
 exports.query = query
-exports.orm = db_orm
+exports.db_worm = db_worm
 
 exports.Table = Table
 exports.Table_Row = Table_Row
