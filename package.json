@@ -21,5 +21,13 @@
     "ws_rmi"
   ],
   "author": "Al Carruth",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "db_orm": "file:../db_orm",
+    "ws_rmi": "file:../ws_rmi"
+  },
+  "dependencies": {
+    "coffeescript": "^2.4.1",
+    "ws": "^7.1.1"
+  }
 }
