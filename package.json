@@ -22,12 +22,11 @@
   ],
   "author": "Al Carruth",
   "license": "MIT",
-  "devDependencies": {
-    "db_worm": "git@github.com:alcarruth/db_worm.git",
-    "ws_rmi": "git@github.com:alcarruth/ws_rmi"
-  },
+  "devDependencies": {},
   "dependencies": {
     "coffeescript": "^2.4.1",
-    "ws": "^7.1.1"
+    "db_worm": "file:../db_worm",
+    "ws": "^7.1.1",
+    "ws_rmi": "file:../ws_rmi"
   }
 }

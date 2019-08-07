@@ -1,15 +1,23 @@
-#!/usr/bin/env coffee
-# -*- coding: utf-8 -*-
+# `tickets_coffee`
 
-{ DB_ORM } = require('db_worm')
+Package `tickets_coffee`, is a re-writing of my
+[Tickets-R-Us](https://github.com/alcarruth/fullstack-p3-item-catalog)
+project using just coffeescript, JSON and two companion packages,
+[`ws_rmi`](https://github.com/alcarruth/ws_rmi), and
+[`db_worm`](https://github.com/alcarruth/db_worm).  The original
+Tickets'R'US project was built with development stack consisting of
+`python`, `sql_alchemy`, `psycopg2` and `flask`.  It worked fine but I
+felt it was not as clean as it could be.  These three packages are the
+result of my ongoing effort to demonstrate that I could that I can do
+better with straight coffeescript and JSON.
 
-# comparison function suitable for sorting by column
-# 
-_by_= (col) -> (a,b) ->
-  a_val = a[col]().valueOf()
-  b_val = b[col]().valueOf()
-  return (if (a_val < b_val) then -1 else 1)
+## Why Coffeescript?
 
+## Overall Design
+
+### Object Relational Mapping
+
+```
 table_defs  =
   
   conference:
@@ -79,19 +87,20 @@ table_defs  =
     seat: string: {}
     lot: reference: { name_name: 'ticket_lot', col_name: 'lot_id' }
 
+```
 
-pg_options = 
-  host: '/var/run/postgresql'
-  database: 'tickets'
 
-try
-  db = new DB_ORM(pg_options, table_defs)
-  exports.db = db
-                  
-catch error
-  console.log("Failed to create db.")
-  console.log error
 
-  
+### Remote Method Invocation
 
+#### `db_rmi`
+
+The second half of the `db_rmi` project is `db_rmi` which extends the
+`ws_rmi` classes with db specific sub-classes so that the `Table` and
+`Table_Row` classes created by `db_orm` are mapped to stub classes on
+the client/browser side.  Calling a method in the browser invokes the
+method in the server on the corresponding remote object on the server
+side which is directly mapped to the database.
+
+## Status
 
