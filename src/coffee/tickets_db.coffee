@@ -86,7 +86,8 @@ pg_options =
 
 try
   db = new DB_ORM(pg_options, table_defs)
-  exports.db = db
+  for k,v of db
+    exports[k] = v
                   
 catch error
   console.log("Failed to create db.")
