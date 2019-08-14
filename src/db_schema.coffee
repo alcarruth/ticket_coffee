@@ -1,7 +1,8 @@
 #!/usr/bin/env coffee
 # -*- coding: utf-8 -*-
-
-{ DB_ORM } = require('db_worm')
+#
+#  db_schema.coffee
+# 
 
 # comparison function suitable for sorting by column
 # 
@@ -10,7 +11,7 @@ _by_= (col) -> (a,b) ->
   b_val = b[col]().valueOf()
   return (if (a_val < b_val) then -1 else 1)
 
-table_defs  =
+db_schema  =
   
   conference:
     abbrev_name: string: { primary_key: true }
@@ -80,19 +81,5 @@ table_defs  =
     lot: reference: { name_name: 'ticket_lot', col_name: 'lot_id' }
 
 
-pg_options = 
-  host: '/var/run/postgresql'
-  database: 'tickets'
-
-try
-  db = new DB_ORM(pg_options, table_defs)
-  for k,v of db
-    exports[k] = v
-                  
-catch error
-  console.log("Failed to create db.")
-  console.log error
-
-  
-
-
+if not window?
+  exports.db_schema = db_schema
