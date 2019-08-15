@@ -1,5 +1,5 @@
 {
-  "name": "tickets_coffee",
+  "name": "web-tix",
   "version": "1.0.0",
   "description": "coffeescript port of my tickets'r'us project",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:alcarruth/tickets_coffee.git"
+    "url": "git@github.com:alcarruth/web-tix.git"
   },
   "keywords": [
     "database",
@@ -25,10 +25,10 @@
   "devDependencies": {},
   "dependencies": {
     "coffeescript": "^2.4.1",
-    "db_worm": "file:../db_worm",
+    "db_worm": "file:../web-worm",
     "nunjucks": "^3.2.0",
     "pg": "^7.12.1",
     "ws": "^7.1.1",
-    "ws_rmi": "file:../ws_rmi"
+    "ws_rmi": "file:../ws-rmi"
   }
 }
