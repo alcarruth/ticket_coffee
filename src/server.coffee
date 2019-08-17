@@ -1,7 +1,9 @@
 #!/usr/bin/env coffee
 #
+#  server.coffee
+#
 
-{ DB_RMI_Server } = require('db_worm')
+{ DB_RMI_Server } = require('web-worm-server')
 { db_schema } = require('./db_schema')
 { local_options, pg_options } = require('./settings')
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env coffee
 # -*- coding: utf-8 -*-
 
-{ DB_ORM, DB_Object } = require('db_worm')
+{ DB_ORM, DB_Object } = require('web-worm')
 { db_schema } = require('./db_schema')
 [ pg_options } = require('./settings')
 

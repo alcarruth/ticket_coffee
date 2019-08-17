@@ -25,10 +25,12 @@
   "devDependencies": {},
   "dependencies": {
     "coffeescript": "^2.4.1",
-    "db_worm": "file:../web-worm",
     "nunjucks": "^3.2.0",
     "pg": "^7.12.1",
+    "util": "^0.12.1",
+    "web-worm-client": "file:/var/www/git/projects/web-worm/client/",
+    "web-worm-server": "file:/var/www/git/projects/web-worm/server/",
     "ws": "^7.1.1",
-    "ws_rmi": "file:../ws-rmi"
+    "ws-rmi": "file:/var/www/git/projects/ws-rmi/"
   }
 }

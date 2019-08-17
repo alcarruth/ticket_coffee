@@ -22,8 +22,7 @@ remote_options =
   log_level: 2
 
 
-if not window?
-  exports.pg_options = pg_options
-  exports.local_options = local_options
-  exports.remote_options = remote_options
+exports.pg_options = pg_options
+exports.local_options = local_options
+exports.remote_options = remote_options
 
