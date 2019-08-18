@@ -4,7 +4,9 @@
 
   //  settings.coffee
 
-  var local_options, pg_options, remote_options;
+  var local_options, log, pg_options, remote_options;
+
+  ({log} = require('./logger'));
 
   pg_options = {
     host: '/var/run/postgresql',
@@ -16,7 +18,8 @@
     port: 8086,
     path: '',
     protocol: 'ws',
-    log_level: 2
+    log_level: 2,
+    log: log
   };
 
   remote_options = {
@@ -24,7 +27,8 @@
     port: 443,
     path: '/wss/tickets_coffee',
     protocol: 'wss',
-    log_level: 2
+    log_level: 2,
+    log: console.log
   };
 
   exports.pg_options = pg_options;

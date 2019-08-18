@@ -4,26 +4,22 @@
 
   //  client.coffee
 
-  var DB_RMI_Client, client, db_schema, remote_options;
+  var DB_RMI_Client, client, db_schema, local_options;
 
   ({DB_RMI_Client} = require('web-worm-client'));
 
   ({db_schema} = require('./db_schema'));
 
-  ({remote_options} = require('./settings'));
+  ({local_options} = require('./settings'));
 
-  client = new DB_RMI_Client(remote_options);
+  client = new DB_RMI_Client(local_options);
 
   exports.client = client;
 
-  if (typeof window !== "undefined" && window !== null) {
-    window.client = client;
-  }
-
   /*
  * invoked from command line start REPL
-repl = require('repl')
-repl.start('client> ').context.client = client
+  repl = require('repl')
+  repl.start('client> ').context.client = client
  */
 
 }).call(this);

@@ -14,6 +14,8 @@
 
   server = new DB_RMI_Server(local_options, pg_options, db_schema);
 
+  server.start();
+
   if (module.parent) {
     exports.server = server;
   } else {
