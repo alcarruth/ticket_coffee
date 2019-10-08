@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 
-#root_dir=/var/www/git/projects/web-tix
-root_dir=/home/carruth/git/web-tix
+root_dir=/var/www/git/projects/web-tix
+#root_dir=/home/carruth/git/web-tix
 build=${root_dir}/build
 src=${root_dir}/src
 browser=${root_dir}/browser
