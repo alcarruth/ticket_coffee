@@ -28,9 +28,9 @@
     "nunjucks": "^3.2.0",
     "pg": "^7.12.1",
     "util": "^0.12.1",
-    "web-worm-client": "file:/var/www/git/projects/web-worm/client/",
-    "web-worm-server": "file:/var/www/git/projects/web-worm/server/",
+    "web-worm-client": "file:../web-worm/client/",
+    "web-worm-server": "file:../web-worm/server/",
     "ws": "^7.1.1",
-    "ws-rmi": "file:/var/www/git/projects/ws-rmi/"
+    "ws-rmi": "file:../ws-rmi/"
   }
 }

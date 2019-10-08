@@ -4,13 +4,21 @@
 
   //  settings.coffee
 
-  var local_options, log, pg_options, remote_options;
+  var ipc_options, local_options, log, pg_options, remote_options;
 
   ({log} = require('./logger'));
 
   pg_options = {
     host: '/var/run/postgresql',
     database: 'tickets'
+  };
+
+  ipc_options = {
+    port: null,
+    host: null,
+    path: '/tmp/stack-rmi',
+    log_level: 2,
+    log: log
   };
 
   local_options = {
