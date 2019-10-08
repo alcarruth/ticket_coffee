@@ -121,8 +121,82 @@ frame.set("loop.revindex0", t_2 - t_1 - 1);
 frame.set("loop.first", t_1 === 0);
 frame.set("loop.last", t_1 === t_2 - 1);
 frame.set("loop.length", t_2);
+output += "\n\n<div class=\"conference-box\">\n  <a class=\"conference-a\" href=\"";
+output += runtime.suppressValue(runtime.memberLookup((t_4),"abbrev_name"), env.opts.autoescape);
+output += "\">\n    <img class=\"conference-logo-img\" src=\"images/conference_logos/";
+output += runtime.suppressValue(runtime.memberLookup((t_4),"logo"), env.opts.autoescape);
+output += "\">\n\n    <h3> ";
+output += runtime.suppressValue(runtime.memberLookup((t_4),"name"), env.opts.autoescape);
+output += " </h3>\n    <p>\n      ";
+frame = frame.push();
+var t_7 = runtime.memberLookup((t_4),"teams");
+if(t_7) {t_7 = runtime.fromIterator(t_7);
+var t_6 = t_7.length;
+for(var t_5=0; t_5 < t_7.length; t_5++) {
+var t_8 = t_7[t_5];
+frame.set("team", t_8);
+frame.set("loop.index", t_5 + 1);
+frame.set("loop.index0", t_5);
+frame.set("loop.revindex", t_6 - t_5);
+frame.set("loop.revindex0", t_6 - t_5 - 1);
+frame.set("loop.first", t_5 === 0);
+frame.set("loop.last", t_5 === t_6 - 1);
+frame.set("loop.length", t_6);
+output += "\n      <span class=\"team-name-span\"> ";
+output += runtime.suppressValue(runtime.memberLookup((t_8),"name"), env.opts.autoescape);
+output += " ";
+output += runtime.suppressValue(runtime.memberLookup((t_8),"nickname"), env.opts.autoescape);
+output += " </span> <br>\n      ";
+;
+}
+}
+frame = frame.pop();
+output += "\n    </p>\n  </a>\n</div>\n\n";
+;
+}
+}
+frame = frame.pop();
+output += "\n";
+if(parentTemplate) {
+parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
+} else {
+cb(null, output);
+}
+;
+} catch (e) {
+  cb(runtime.handleError(e, lineno, colno));
+}
+}
+return {
+root: root
+};
+
+})();
+})();
+(function() {(window.nunjucksPrecompiled = window.nunjucksPrecompiled || {})["conferences_bak.html"] = (function() {
+function root(env, context, frame, runtime, cb) {
+var lineno = 0;
+var colno = 0;
+var output = "";
+try {
+var parentTemplate = null;
+output += "\n<h1 class=\"main-h1\"> Step 1 - Pick a Conference:</h1>\n<div class=\"controls-div\">\n</div>\n\n";
+frame = frame.push();
+var t_3 = runtime.contextOrFrameLookup(context, frame, "conferences");
+if(t_3) {t_3 = runtime.fromIterator(t_3);
+var t_2 = t_3.length;
+for(var t_1=0; t_1 < t_3.length; t_1++) {
+var t_4 = t_3[t_1];
+frame.set("conference", t_4);
+frame.set("loop.index", t_1 + 1);
+frame.set("loop.index0", t_1);
+frame.set("loop.revindex", t_2 - t_1);
+frame.set("loop.revindex0", t_2 - t_1 - 1);
+frame.set("loop.first", t_1 === 0);
+frame.set("loop.last", t_1 === t_2 - 1);
+frame.set("loop.length", t_2);
 output += "\n\n<div class=\"conference-box\">\n  <a class=\"conference-a\"\n     href=\"";
-output += runtime.suppressValue((lineno = 9, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "url_for"), "url_for", context, ["conference",runtime.makeKeywordArgs({"conference": runtime.memberLookup((t_4),"abbrev_name")})])), env.opts.autoescape);
+output += runtime.suppressValue(runtime.memberLookup((t_4),"abbrev_name"), env.opts.autoescape);
 output += "\">\n\n    <h3> ";
 output += runtime.suppressValue(runtime.memberLookup((t_4),"name"), env.opts.autoescape);
 output += " </h3>\n    <p>\n      ";
@@ -141,7 +215,7 @@ frame.set("loop.first", t_5 === 0);
 frame.set("loop.last", t_5 === t_6 - 1);
 frame.set("loop.length", t_6);
 output += "\n      <img class=\"team-logo-img\" src=\"";
-output += runtime.suppressValue((lineno = 14, colno = 48, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "url_for"), "url_for", context, ["static",runtime.makeKeywordArgs({"filename": runtime.memberLookup((t_8),"logo")})])), env.opts.autoescape);
+output += runtime.suppressValue(runtime.memberLookup((t_8),"logo"), env.opts.autoescape);
 output += "\">\n      <span class=\"team-name-span\"> ";
 output += runtime.suppressValue(runtime.memberLookup((t_8),"name"), env.opts.autoescape);
 output += " ";

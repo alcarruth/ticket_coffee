@@ -4,7 +4,7 @@
 
   //  app.coffee
 
-  var App, DB_RMI_Client, app, db_schema, nunjucks, options, templates;
+  var App, DB_RMI_Client, ImageElements, app, background_image_64, conference_logos_64, db_schema, nunjucks, options, templates;
 
   ({DB_RMI_Client} = require('web-worm-client'));
 
@@ -14,16 +14,44 @@
 
   nunjucks = require('nunjucks/browser/nunjucks-slim');
 
-  templates = require('./templates');
+  templates = require('./templates.js');
+
+  // { team_logos_64 } = require('./team_logos_64')
+  ({conference_logos_64} = require('./conference_logos_64'));
+
+  ({background_image_64} = require('./background_image_64'));
+
+  ({ImageElements} = require('./image_elements'));
 
   App = class App {
-    constructor(options1, db_schema1, nunjucks1, templates1) {
+    constructor(options1, db_schema1) {
+      var div, title_h1;
       this.start = this.start.bind(this);
+      this.conferences_view = this.conferences_view.bind(this);
+      this.conference_view = this.conference_view.bind(this);
+      this.ticket_lot_view = this.ticket_lot_view.bind(this);
+      this.user_view = this.user_view.bind(this);
+      this.game_tickets_view = this.game_tickets_view.bind(this);
+      this.delete_image_view = this.delete_image_view.bind(this);
+      this.delete_tickets_view = this.delete_tickets_view.bind(this);
+      this.edit_tickets_view = this.edit_tickets_view.bind(this);
+      this.landing_view = this.landing_view.bind(this);
+      this.layout_view = this.layout_view.bind(this);
+      this.login_view = this.login_view.bind(this);
+      this.sell_tickets_view = this.sell_tickets_view.bind(this);
       this.options = options1;
       this.db_schema = db_schema1;
-      this.nunjucks = nunjucks1;
-      this.templates = templates1;
       this.client = new DB_RMI_Client(this.options);
+      this.header = document.getElementById('header');
+      this.header_title - (div = document.getElementById('header-title-div'));
+      this.header - (title_h1 = document.getElementById('header-title-h1'));
+      this.header_login_div = document.getElementById('header-login-div');
+      this.main = document.getElementById('main');
+      this.footer = document.getElementById('footer');
+      this.flash_messages = document.getElementsByClassName('flash-messages');
+      this.image_elements = new ImageElements({
+        conference_logos_64: conference_logos_64
+      });
       this.start();
     }
 
@@ -37,13 +65,54 @@
       });
     }
 
+    async conferences_view(db) {
+      var conf, conference, conferences, cs, html, i, len, teams;
+      conferences = (await this.db.tables.conference.find_all());
+      cs = [];
+      for (i = 0, len = conferences.length; i < len; i++) {
+        conference = conferences[i];
+        conf = conference.simple_obj();
+        teams = (await conference.teams());
+        conf.teams = teams.map(function(team) {
+          return team.simple_obj();
+        });
+        cs.push(conf);
+      }
+      html = nunjucks.render('conferences.html', {
+        conferences: cs
+      });
+      return this.main.innerHTML = html;
+    }
+
+    conference_view(conference) {}
+
+    ticket_lot_view() {}
+
+    user_view() {}
+
+    game_tickets_view() {}
+
+    delete_image_view() {}
+
+    delete_tickets_view() {}
+
+    edit_tickets_view() {}
+
+    landing_view() {}
+
+    layout_view() {}
+
+    login_view() {}
+
+    sell_tickets_view() {}
+
   };
 
-  app = new App(options, db_schema, nunjucks, templates);
-
   if (typeof window !== "undefined" && window !== null) {
+    app = new App(options, db_schema);
     window.app = app;
   } else {
+    app = new App(options, db_schema);
     exports.app = app;
   }
 

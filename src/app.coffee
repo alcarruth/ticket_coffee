@@ -8,12 +8,26 @@
 
 options = require('./settings').remote_options
 nunjucks = require('nunjucks/browser/nunjucks-slim')
-templates = require('./templates')
+templates = require('./templates.js')
+
+# { team_logos_64 } = require('./team_logos_64')
+{ conference_logos_64 } = require('./conference_logos_64')
+{ background_image_64 } = require('./background_image_64')
+{ ImageElements } = require('./image_elements')
+
 
 class App
 
-  constructor: (@options, @db_schema, @nunjucks, @templates) ->
+  constructor: (@options, @db_schema) ->
     @client = new DB_RMI_Client(@options)
+    @header = document.getElementById('header')
+    @header_title-div = document.getElementById('header-title-div')
+    @header-title_h1 = document.getElementById('header-title-h1')
+    @header_login_div = document.getElementById('header-login-div')
+    @main = document.getElementById('main')
+    @footer = document.getElementById('footer')
+    @flash_messages = document.getElementsByClassName('flash-messages')
+    @image_elements = new ImageElements(conference_logos_64: conference_logos_64)
     @start()
 
   start: =>
@@ -25,11 +39,45 @@ class App
       console.log("trouble starting app :-(")
       console.log error)
 
-app = new App(options, db_schema, nunjucks, templates)
+  conferences_view: (db) =>
+    conferences = await @db.tables.conference.find_all()
+    cs = []
+    for conference in conferences
+      conf = conference.simple_obj()
+      teams = await conference.teams()
+      conf.teams = (teams).map((team)->team.simple_obj())
+      cs.push(conf)
+    html = nunjucks.render('conferences.html', {conferences: cs})
+    @main.innerHTML = html
+
+
+  conference_view: (conference) =>
+
+  ticket_lot_view: () =>
+
+  user_view: () =>
+
+  game_tickets_view: () =>
+
+  delete_image_view: () =>
+
+  delete_tickets_view: () =>
+
+  edit_tickets_view: () =>
+
+  landing_view: () =>
+
+  layout_view: () =>
+
+  login_view: () =>
+
+  sell_tickets_view: () =>
 
 
 if window?
+  app = new App(options, db_schema)
   window.app = app
 
 else  
+  app = new App(options, db_schema)
   exports.app = app

@@ -4,9 +4,75 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Web Tix </title>
-    <script src="web_tix.js"></script>
+    <!--
+    <script src="nunjucks-slim.js"></script>
+    <script src="templates.js"></script>
+    -->
+    <link rel="stylesheet" type="text/css" href="css/tickets.css">
   </head>
   <body>
-    <h1> Web Tix </h1>
+
+    <div id="container">
+
+      <div id="header">
+
+        <div id="header-title-div">
+          <h1 id="header-title-h1">
+            <!--
+            <a id="title-a" href="{{ url_for('conferences') }}">Tickets 'R' Us </a>
+            -->
+            Web Tix              
+          </h1>
+          <p>
+            Buy and Sell College Football Tickets!
+          </p>
+        </div>
+
+        <div id="header-login-div">
+          <!--
+          {% if 'login' in app_session %}
+          {% set user_id = app_session.get('user_id') %}
+          {% set user_name = app_session.get('user_name') %}
+
+          <a class="header-login-a" href="{{ url_for('user', user_id=user_id) }}">
+            {{ user_name }} </a>
+          <a class="header-login-a" href="{{ url_for('disconnect') }}"> 
+            <button> Logout </button> </a>
+
+          {% else %}
+
+          <a class="header-login-a" href="{{ url_for('login') }}">
+            <button> Login </button> </a>
+
+          {% endif %}
+          -->
+        </div>
+
+        <p class="flash-messages">
+          <!--
+          {% for message in get_flashed_messages() %}
+          {{ message }}<br>
+          {% endfor %}
+        -->
+        </p> <!-- flash-messages -->
+      </div> <!-- header -->
+
+
+      <div id="main">
+        <!--
+        {{main}}
+        -->
+      </div> <!-- main -->
+
+
+      <div id="footer">
+        <!--
+        {{footer}}
+        -->
+      </div>  <!-- footer -->
+
+    </div> <!-- container -->
+
   </body>
+  <script src="web_tix.js" type="application/javascript"></script>
 </html>

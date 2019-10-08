@@ -18,16 +18,26 @@ pushd ${root_dir}/../web-worm
 popd
 
 pushd ${src}
-coffee -co ${build} db_schema.coffee settings.coffee app.coffee
-coffee -co ${build} logger.coffee client.coffee server.coffee
+coffee -co ${build} db_schema.coffee settings.coffee app.coffee > /dev/null
+coffee -co ${build} logger.coffee client.coffee server.coffee > /dev/null
+coffee -co ${build} conference_logos_64.coffee image_elements.coffee
+coffee -co ${build} team_logos_64.coffee background_image_64.coffee
+cp ../node_modules/nunjucks/browser/nunjucks-slim.min.js ${build}
 ../node_modules/nunjucks/bin/precompile ./templates/ > ${build}/templates.js
 cp index.html ${build}
+cp -r ./css ${build}
 popd
 
 pushd ${build}
 browserify -o web_tix.js app.js 
 cp ./index.html ${browser}
 cp ./web_tix.js ${browser}
+cp -r ./css ${browser}
 popd
+
+pushd ${browser}
+ln -s ../src/images .
+popd
+
 
 
