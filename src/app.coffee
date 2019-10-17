@@ -3,10 +3,12 @@
 #  app.coffee
 #
 
-{ DB_RMI_Client } = require('web-worm-client')
+{ DB_RMI_Client } = require('web-worm/client')
 { db_schema } = require('./db_schema')
+{ remote_options } = require('./settings')
+client = new DB_RMI_Client(db_schema, remote_options)
+console.log(db_schema)
 
-options = require('./settings').remote_options
 nunjucks = require('nunjucks/browser/nunjucks-slim')
 templates = require('./templates.js')
 
@@ -18,8 +20,7 @@ templates = require('./templates.js')
 
 class App
 
-  constructor: (@options, @db_schema) ->
-    @client = new DB_RMI_Client(@options)
+  constructor: (@client) ->
     @header = document.getElementById('header')
     @header_title-div = document.getElementById('header-title-div')
     @header-title_h1 = document.getElementById('header-title-h1')
@@ -74,10 +75,14 @@ class App
   sell_tickets_view: () =>
 
 
+
+app = new App(client)
+# app = { client: client, db_schema: db_schema }
+
+    
 if window?
-  app = new App(options, db_schema)
   window.app = app
 
 else  
-  app = new App(options, db_schema)
-  exports.app = app
+  exports = app
+

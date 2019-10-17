@@ -5,10 +5,10 @@
 
 { DB_RMI_Client } = require('web-worm/client')
 { db_schema } = require('./db_schema')
-{ ipc_options } = require('./settings')
+{ remote_options } = require('./settings')
 
 
-client = new DB_RMI_Client(db_schema, ipc_options)
+client = new DB_RMI_Client(db_schema, remote_options)
 
 
 if module.parent

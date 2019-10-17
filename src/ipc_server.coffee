@@ -5,9 +5,9 @@
 
 { DB_RMI_Server } = require('web-worm/server')
 { db_schema } = require('./db_schema')
-{ local_options, pg_options } = require('./settings')
+{ ipc_options, pg_options } = require('./settings')
 
-options = local_options
+options = ipc_options
 
 server = new DB_RMI_Server(db_schema, pg_options, options)
 

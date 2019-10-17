@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 #
-#  settings.coffee
+#  web-tix/src/settings.coffee
 #
 
 { log } = require('./logger')

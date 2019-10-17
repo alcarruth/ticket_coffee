@@ -1,7 +1,6 @@
 #!/usr/bin/env coffee
-# -*- coding: utf-8 -*-
 #
-#  db_schema.coffee
+#  web-tix/src/db_schema.coffee
 # 
 
 # comparison function suitable for sorting by column
@@ -81,5 +80,6 @@ db_schema  =
     lot: reference: { name_name: 'ticket_lot', col_name: 'lot_id' }
 
 
-if not window?
-  exports.db_schema = db_schema
+#if not window?
+exports.db_schema = db_schema
+  

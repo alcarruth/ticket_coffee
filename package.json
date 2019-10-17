@@ -28,8 +28,7 @@
     "nunjucks": "^3.2.0",
     "pg": "^7.12.1",
     "util": "^0.12.1",
-    "web-worm-client": "file:../web-worm/client/",
-    "web-worm-server": "file:../web-worm/server/",
+    "web-worm": "file:../web-worm/",
     "ws": "^7.1.1",
     "ws-rmi": "file:../ws-rmi/"
   }

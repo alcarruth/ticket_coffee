@@ -21,8 +21,12 @@ popd
 pushd ${src}
 coffee -co ${build} db_schema.coffee settings.coffee app.coffee > /dev/null
 coffee -co ${build} logger.coffee client.coffee server.coffee > /dev/null
+
+pushd images
 coffee -co ${build} conference_logos_64.coffee image_elements.coffee
 coffee -co ${build} team_logos_64.coffee background_image_64.coffee
+popd
+
 cp ../node_modules/nunjucks/browser/nunjucks-slim.min.js ${build}
 ../node_modules/nunjucks/bin/precompile ./templates/ > ${build}/templates.js
 cp index.html ${build}
