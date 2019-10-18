@@ -2,47 +2,78 @@
 #
 
 root_dir=/var/www/git/projects/web-tix
-#root_dir=/home/carruth/git/web-tix
+
+lib=${root_dir}/lib
 build=${root_dir}/build
 src=${root_dir}/src
 browser=${root_dir}/browser
 
-rm -rf ${build} ${browser}
-mkdir -p ${build} ${browser}
+function clean {
+    echo "clean"
+    rm -rf ${lib} ${build} ${browser}
+    mkdir -p ${lib} ${build} ${browser}
+}
 
-pushd ${root_dir}/../ws-rmi
-./bin/build.sh
-popd
+function build_ws_rmi {
+    echo build_ws_rmi
+    pushd ${root_dir}/../ws-rmi > /dev/null
+    ./bin/build.sh > /dev/null
+    popd
+}
 
-pushd ${root_dir}/../web-worm
-./bin/build.sh
-popd
+function build_web_worm {
+    echo build_web_worm
+    pushd ${root_dir}/../web-worm > /dev/null
+    ./bin/build.sh > /dev/null
+    popd > /dev/null
+}
 
-pushd ${src}
-coffee -co ${build} db_schema.coffee settings.coffee app.coffee > /dev/null
-coffee -co ${build} logger.coffee client.coffee server.coffee > /dev/null
+function build_lib {
+    echo build_lib 
+    pushd ${src}/lib > /dev/null
+    coffee -co ${lib} *.coffee > /dev/null
+    popd > /dev/null
+}
 
-pushd images
-coffee -co ${build} conference_logos_64.coffee image_elements.coffee
-coffee -co ${build} team_logos_64.coffee background_image_64.coffee
-popd
+function build_images {
+    echo build_images
+    pushd ${src}/browser/images > /dev/null
+    coffee -co ${build} conference_logos_64.coffee image_elements.coffee
+    coffee -co ${build} team_logos_64.coffee background_image_64.coffee
+    popd > /dev/null
+}
 
-cp ../node_modules/nunjucks/browser/nunjucks-slim.min.js ${build}
-../node_modules/nunjucks/bin/precompile ./templates/ > ${build}/templates.js
-cp index.html ${build}
-cp -r ./css ${build}
-popd
+function build_templates {
+    echo build_templates 
+    pushd ${build} > /dev/null
+    nunjucks="${root_dir}/node_modules/nunjucks"
+    cp ${nunjucks}/browser/nunjucks-slim.min.js .
+    ${nunjucks}/bin/precompile ${src}/browser/templates/ > ${build}/templates.js
+    popd > /dev/null
+}
 
-pushd ${build}
-browserify -o web_tix.js app.js 
-cp ./index.html ${browser}
-cp ./web_tix.js ${browser}
-cp -r ./css ${browser}
-popd
+function build_browser {
+    echo build_browser
+    pushd ${build} > /dev/null
+    coffee -co ${build} ${src}/browser/app.coffee
+    ln -s ${lib}/db_schema.js ${lib}/settings.js .
+    browserify -o ${browser}/web_tix.js ${build}/app.js 
+    cp ${src}/browser/index.html ${browser}
+    cp -r ${src}/browser/css ${browser}
+    cp -r ${src}/browser/images ${browser}
+    popd > /dev/null
+}
 
-pushd ${browser}
-ln -s ../src/images .
-popd
+function build {
+    clean
+    # build_ws_rmi
+    # build_web_worm
+    build_lib
+    build_images
+    build_templates
+    build_browser
+}
 
 
+build
 
