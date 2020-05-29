@@ -3,6 +3,8 @@
 #  logger.coffee
 #
 
+util = require('util')
+
 # The code below works great in nodejs in which console.log has a
 # shallow depth by default.  The conditional inclusion (not window?)
 # also worked well before I started using browserify to bundle the js,

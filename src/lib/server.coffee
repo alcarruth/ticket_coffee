@@ -8,7 +8,6 @@
 { local_options, pg_options } = require('./settings')
 
 options = local_options
-
 server = new DB_RMI_Server(db_schema, pg_options, options)
 
 

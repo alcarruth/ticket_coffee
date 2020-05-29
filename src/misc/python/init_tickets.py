@@ -55,6 +55,7 @@ def load_conferences_from_json():
 
 # returns a list of n Saturdays
 # starting on first Saturday in Sept of year
+
 def get_saturdays(year, n):
     # set date to first Saturday in September
     sep1 = datetime.date(year, 9, 1)

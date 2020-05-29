@@ -8,7 +8,6 @@
 { ipc_options, pg_options } = require('./settings')
 
 options = ipc_options
-
 server = new DB_RMI_Server(db_schema, pg_options, options)
 
 

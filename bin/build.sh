@@ -1,12 +1,13 @@
 #!/bin/bash
 #
 
-root_dir=/var/www/git/projects/web-tix
+root_dir=/opt/github/web-tix/
 
 lib=${root_dir}/lib
 build=${root_dir}/build
 src=${root_dir}/src
 browser=${root_dir}/browser
+server=${root_dir}/server
 
 function clean {
     echo "clean"
@@ -33,6 +34,11 @@ function build_lib {
     pushd ${src}/lib > /dev/null
     coffee -co ${lib} *.coffee > /dev/null
     popd > /dev/null
+}
+
+function build_server {
+    echo build_server
+    cp -r ${src}/server .
 }
 
 function build_images {
@@ -66,9 +72,10 @@ function build_browser {
 
 function build {
     clean
-    # build_ws_rmi
-    # build_web_worm
+    #build_ws_rmi
+    #build_web_worm
     build_lib
+    build_server
     build_images
     build_templates
     build_browser
