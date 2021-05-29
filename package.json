@@ -30,7 +30,7 @@
     "session": "^0.1.0",
     "util": "^0.12.1",
     "web-worm": "git+https://github.com/alcarruth/web-worm.git",
-    "ws": "^7.1.1",
+    "ws": "^7.4.6",
     "ws-rmi": "git+https://github.com/alcarruth/ws-rmi.git"
   }
 }
