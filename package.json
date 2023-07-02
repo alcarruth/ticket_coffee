@@ -29,8 +29,8 @@
     "pg": "^7.12.1",
     "session": "^0.1.0",
     "util": "^0.12.1",
-    "web-worm": "git+https://github.com/alcarruth/web-worm.git",
+    "web-worm": "file:../web-worm",
     "ws": "^7.1.1",
-    "ws-rmi": "git+https://github.com/alcarruth/ws-rmi.git"
+    "ws-rmi": "file:../ws-rmi"
   }
 }
