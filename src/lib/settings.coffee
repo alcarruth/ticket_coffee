@@ -7,6 +7,8 @@
 
 pg_options = 
   host: '/var/run/postgresql'
+  user: 'tickets_user'
+  password: 'fijilinc'
   database: 'tickets'
 
 ipc_options =
