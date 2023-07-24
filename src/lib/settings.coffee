@@ -18,6 +18,8 @@ pg_options =
   # user: 'webtix'
   # password: 'fijilinc'
   host: '/var/run/postgresql'
+  user: 'tickets_user'
+  password: 'fijilinc'
   database: 'tickets'
 
 

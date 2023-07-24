@@ -26,8 +26,7 @@
   "dependencies": {
     "coffeescript": "^2.4.1",
     "nunjucks": "^3.2.0",
-    "pg": "^7.12.1",
-    "session": "^0.1.0",
+    "pg": "^8.11.1",
     "util": "^0.12.1",
     "web-worm": "file:../web-worm",
     "ws": "^7.1.1",
