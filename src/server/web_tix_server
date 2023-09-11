@@ -5,8 +5,9 @@ export PATH="$NODE_ROOT/bin:$PATH"
 export NODE_PATH="$NODE_ROOT/lib/node_modules"
 
 APP_NAME="web_tix_server"
-APP_DIR="/opt/github/web-tix";
-APP_CMD="coffee ${APP_DIR}/server/start_server.coffee";
+#APP_DIR="/opt/github/web-tix";
+APP_DIR="/home/carruth/git/web-tix";
+APP_CMD="coffee ${APP_DIR}/server/start_server";
 
 LOG_FILE="${APP_DIR}/${APP_NAME}.log"
 PID_FILE="${APP_DIR}/${APP_NAME}.pid"

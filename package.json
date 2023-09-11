@@ -22,15 +22,15 @@
   ],
   "author": "Al Carruth",
   "license": "MIT",
-  "devDependencies": {},
   "dependencies": {
+    "browserify": "^17.0.0",
     "coffeescript": "^2.4.1",
-    "nunjucks": "^3.2.0",
+    "jszip": "^3.4.0",
+    "nunjucks": "^3.2.1",
     "pg": "^7.12.1",
     "session": "^0.1.0",
     "util": "^0.12.1",
-    "web-worm": "git+https://github.com/alcarruth/web-worm.git",
-    "ws": "^7.1.1",
-    "ws-rmi": "git+https://github.com/alcarruth/ws-rmi.git"
+    "web-worm": "git+https://github.com/alcarruth/web-worm.git#develop",
+    "ws": "^7.1.1"
   }
 }

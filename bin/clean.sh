@@ -1,9 +1,10 @@
 #!/bin/bash
 #
-# file: bin/build.sh
+# file: bin/clean.sh
 # package: web-tix
 #
 
 source bin/defs.sh
 
-build
+clean
+
