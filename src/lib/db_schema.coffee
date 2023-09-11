@@ -14,8 +14,8 @@ db_schema  =
   
   conference:
     abbrev_name: string: { primary_key: true }
-    name: string: {}
-    logo: string: {}
+    name: string: {} # TODO: add unique: true, nullable: false
+    logo: string: {} # TODO: add nullable: false
     teams: back_reference: { table_name: 'team', col_name: 'conference_name' }
 
   team:

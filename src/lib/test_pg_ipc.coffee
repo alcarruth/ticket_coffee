@@ -1,4 +1,4 @@
-#!/usr/bin/env coffee
+#!/usr/bin/env coffee 
 #
 
 # Unix Domain Sockets
@@ -8,7 +8,6 @@
 # connection instead of a password.
 
 { Client } = require('pg')
-{ pg_options } = require('./settings')
 
 ipc_options = {
   host: '/var/run/postgresql'
@@ -17,6 +16,4 @@ ipc_options = {
   database: 'tickets'
 }
 
-ipc_client = new Client(ipc_options)
-
-module.exports = ipc_client
+module.exports = new Client(ipc_options)

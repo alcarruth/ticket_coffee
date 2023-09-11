@@ -32,7 +32,7 @@ ipc_options =
   host: null
   path: '/tmp/web-tix'
   uid: 1000 # carruth
-  gid: 33 # www-data
+  gid: 1001 # www-data
   log_level: 0
   log: log
 

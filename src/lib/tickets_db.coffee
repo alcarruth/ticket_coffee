@@ -10,6 +10,14 @@ try
   db = new DB_ORM(db_obj, db_schema)
   db.init_tables()
   module.exports = db
+
+  if module.parent
+    module.exports = db
+
+  else
+    # invoked from command line start REPL
+    repl = require('repl')
+    repl.start('tickets_db> ').context.db = db
                   
 catch error
   console.log("Failed to create db.")
