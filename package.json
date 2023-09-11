@@ -28,6 +28,7 @@
     "jszip": "^3.4.0",
     "nunjucks": "^3.2.1",
     "pg": "^7.12.1",
+    "semver": "^7.5.3",
     "session": "^0.1.0",
     "util": "^0.12.1",
     "web-worm": "git+https://github.com/alcarruth/web-worm.git#develop",
